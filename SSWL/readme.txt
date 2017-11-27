@@ -4,7 +4,7 @@ This package contains the source code for the following paper:
     Hao-Chen Dong and Yu-Feng Li and Zhi-Hua Zhou. Learning from Semi-SupervisedWeak-Label Data. AAAI 2018.
 ______________________________________________________________________________________
 ---- * Manual * ----------------------------------------------------------------------
-The main algorithm is given in SSWL.m, whose manual is as following: 
+The main algorithm is given in 'SSWL.m', whose manual is as following: 
 
    input varables:
        Train_Matrix: input feature vectors of training data and unlabeled data
