@@ -24,11 +24,16 @@ test_num = instance_row - train_num - unlabel_num;
 
 incomplete_Set = [0 0.1 0.2 0.3 0.4 0.5 0.6];
 
-Train_Matrix = Feature_Matrix(R(1:train_num),:);
-Train_Label = Label_Matrix(R(1:train_num),:);
-UnLabel_Matrix = Feature_Matrix(R(train_num+1:train_num + unlabel_num),:);
-Test_Matrix = Feature_Matrix(R(train_num+unlabel_num+1:end),:);
-Test_Label = Label_Matrix(R(train_num+unlabel_num+1:end),:);
+for inc = 1 : 7
+    incomplete = incomplete_Set(1,inc);    
+    
+    R = randperm(instance_row);
+
+    Train_Matrix = Feature_Matrix(R(1:train_num),:);
+    Train_Label = Label_Matrix(R(1:train_num),:);
+    UnLabel_Matrix = Feature_Matrix(R(train_num+1:train_num + unlabel_num),:);
+    Test_Matrix = Feature_Matrix(R(train_num+unlabel_num+1:end),:);
+    Test_Label = Label_Matrix(R(train_num+unlabel_num+1:end),:);
 
 % dimension reduction
 %     PCA_K = 50;
@@ -37,11 +42,6 @@ Test_Label = Label_Matrix(R(train_num+unlabel_num+1:end),:);
 %     UnLabel_Matrix = UnLabel_Matrix*COEFF(:,1:PCA_K);
 %     Test_Matrix = Test_Matrix*COEFF(:,1:PCA_K);
 
-for inc = 1 : 7
-    incomplete = incomplete_Set(1,inc);    
-    
-    R = randperm(instance_row);
-        
     Z = createIncomplete_Label(Train_Label, incomplete,random_train_Index);
 
     save([data_name,'/',data_name,'Infor',num2str(incomplete),'.mat'],'Train_Matrix','Test_Matrix','Z','Train_Label','Test_Label','UnLabel_Matrix','-v7');
